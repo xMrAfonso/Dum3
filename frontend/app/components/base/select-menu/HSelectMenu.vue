@@ -38,7 +38,8 @@ const handleItemClick = (item: string) => {
 </script>
 
 <template>
-  <HDropdownMenu :label="modelValue || placeholder" v-model:open="toggleState" :width="width" :autoClose="autoClose" :side="side" :align="align">
+  <HDropdownMenu :label="modelValue || placeholder" :icon="toggleState ? 'lucide:chevron-down' : 'lucide:chevron-up'"
+                 iconSide="right" v-model:open="toggleState" :width="width" :autoClose="autoClose" :side="side" :align="align">
     <template #default>
       <div
         class="list"

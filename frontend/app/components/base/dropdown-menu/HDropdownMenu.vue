@@ -8,6 +8,8 @@ const {
   autoClose = true,
   label = 'Open Menu',
   triggerType = 'secondary',
+  icon = undefined,
+  iconSide = "left"
 } = defineProps<{
   side?: 'top' | 'right' | 'bottom' | 'left';
   align?: 'start' | 'center' | 'end';
@@ -16,6 +18,8 @@ const {
   autoClose?: boolean;
   label?: string;
   triggerType?: 'primary' | 'secondary' | 'danger' | 'transparent';
+  icon?: string;
+  iconSide?: 'left' | 'right';
 }>()
 
 const emit = defineEmits<{
@@ -43,15 +47,17 @@ const handleContentClick = () => {
   <DropdownMenuRoot v-model:open="toggleState">
     <DropdownMenuTrigger as-child>
       <HButton
+          v-if="!$slots.trigger"
           :buttonType="triggerType"
           distancedIcon
           textAlign="left"
-          :icon="toggleState ? 'lucide:chevron-down' : 'lucide:chevron-up'"
-          iconSide="right"
+          :icon="icon"
+          :iconSide="iconSide"
           :width="width"
       >
         {{ label }}
       </HButton>
+      <slot name="trigger"/>
     </DropdownMenuTrigger>
 
     <DropdownMenuPortal>
